@@ -12,10 +12,10 @@ import datetime
 ram_bytes = psutil.virtual_memory().total
 ram_gb = round(ram_bytes / (1024 ** 3), 2)
 cpu_name = platform.processor()
-windows_version = platform.platform()  # plus complet que platform.version()
+windows_version = platform.platform() 
 ASCII_CHARS = "#$%&'()*+,-./:;<=>?@[]^_`{|}~"
 
-disk_info = []  # Liste de dictionnaires avec info disque
+disk_info = []  
 
 def collect_disk_info():
     global disk_info
@@ -38,7 +38,6 @@ def collect_disk_info():
                 "percent": percent
             })
         except PermissionError:
-            # Certains disques système peuvent renvoyer une erreur
             disk_info.append({
                 "device": part.device,
                 "mountpoint": part.mountpoint,
@@ -56,12 +55,9 @@ def get_gpu_name():
     return gpus
 
 def draw_windows_logo_in_ascii():
-    # Gestion du chemin compatible PyInstaller
     if getattr(sys, 'frozen', False):
-        # Exécutable PyInstaller
         script_dir = sys._MEIPASS
     else:
-        # Script Python normal
         script_dir = os.path.dirname(os.path.abspath(__file__))
     logo_path = os.path.join(script_dir, "logo.png")
 
@@ -110,7 +106,7 @@ def main():
     print(f"  Hostname: {get_network_info()[0]}")
     print(f"  IP Address: {get_network_info()[1]}")
 
-    input("\nAppuyez sur Entrée pour quitter...")  # Permet de voir le terminal après double clic
+    input("\nAppuyez sur Entrée pour quitter...") 
 
 if __name__ == "__main__":
     main()
